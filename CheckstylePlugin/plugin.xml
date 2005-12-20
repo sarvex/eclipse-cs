@@ -304,6 +304,7 @@
             readonly="true"
             selected="true">
             <data value="java"/> 
+            <data value="properties"/> 
       </filter>
       <filter
             name="%WriteProtectedFilter.label"
