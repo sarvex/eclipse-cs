@@ -73,19 +73,22 @@ public class FilesInSyncFilter2 extends AbstractFilter
 
                     Subscriber subscriber = provider.getSubscriber();
 
-                    try
+                    if (subscriber != null)
                     {
-                        SyncInfo synchInfo = subscriber.getSyncInfo(file);
-
-                        if (synchInfo != null)
+                        try
                         {
-                            int kind = synchInfo.getKind();
-                            passes = (SyncInfo.getDirection(kind) & SyncInfo.OUTGOING) == SyncInfo.OUTGOING;
+                            SyncInfo synchInfo = subscriber.getSyncInfo(file);
+
+                            if (synchInfo != null)
+                            {
+                                int kind = synchInfo.getKind();
+                                passes = (SyncInfo.getDirection(kind) & SyncInfo.OUTGOING) == SyncInfo.OUTGOING;
+                            }
                         }
-                    }
-                    catch (TeamException e)
-                    {
-                        CheckstyleLog.log(e);
+                        catch (TeamException e)
+                        {
+                            CheckstyleLog.log(e);
+                        }
                     }
                 }
             }
