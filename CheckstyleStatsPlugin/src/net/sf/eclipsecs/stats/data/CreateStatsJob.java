@@ -46,6 +46,8 @@ import com.atlassw.tools.eclipse.checkstyle.builder.CheckstyleMarker;
 import com.atlassw.tools.eclipse.checkstyle.config.meta.MetadataFactory;
 import com.atlassw.tools.eclipse.checkstyle.config.meta.RuleMetadata;
 import com.atlassw.tools.eclipse.checkstyle.util.CheckstyleLog;
+import com.atlassw.tools.eclipse.checkstyle.util.CheckstylePluginException;
+import com.atlassw.tools.eclipse.checkstyle.util.CustomLibrariesClassLoader;
 
 /**
  * Job implementation that builds the data objects for the statistic views.
@@ -184,7 +186,16 @@ public class CreateStatsJob extends Job
             String packageName = aClassName.substring(0, endIndex);
             messages = packageName + "." + messages; //$NON-NLS-1$
         }
-        ResourceBundle resourceBundle = ResourceBundle.getBundle(messages);
+        ResourceBundle resourceBundle;
+        try
+        {
+            resourceBundle = ResourceBundle.getBundle(messages, CheckstylePlugin
+                    .getPlatformLocale(), CustomLibrariesClassLoader.get());
+        }
+        catch (CheckstylePluginException e)
+        {
+            throw new RuntimeException(e);
+        }
         return resourceBundle.getString(key);
     }
 
