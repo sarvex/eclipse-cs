@@ -67,34 +67,38 @@ public class CreateStatsJob extends Job
     /** Regexp to find suites of ' character. */
     private static final Pattern REGEXP_QUOTE = Pattern.compile("'+"); //$NON-NLS-1$
 
-    //
-    // attributes
-    //
-
     /** The filter to analyze. */
     private CheckstyleMarkerFilter mFilter;
 
     /** The statistics data object. */
     private Stats mStats = null;
 
-    //
-    // constructors
-    //
+    /** The job family this job belongs to. */
+    private final String mFamily;
 
     /**
      * Creates the job.
      * 
      * @param filter the marker filter to analyze
      */
-    public CreateStatsJob(CheckstyleMarkerFilter filter)
+    public CreateStatsJob(CheckstyleMarkerFilter filter, String family)
     {
         super(Messages.CreateStatsJob_msgAnalyzeMarkers);
         mFilter = (CheckstyleMarkerFilter) filter.clone();
+        mFamily = family;
     }
 
-    //
-    // methods
-    //
+    public boolean shouldSchedule()
+    {
+
+        Job[] similarJobs = getJobManager().find(mFamily);
+        return similarJobs.length == 0;
+    }
+
+    public boolean belongsTo(Object family)
+    {
+        return mFamily != null && mFamily.equals(family);
+    }
 
     /**
      * @see InternalJob#run(org.eclipse.core.runtime.IProgressMonitor)

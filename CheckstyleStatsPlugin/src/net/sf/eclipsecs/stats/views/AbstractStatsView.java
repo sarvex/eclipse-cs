@@ -237,7 +237,7 @@ public abstract class AbstractStatsView extends ViewPart
                 .getAdapter(IWorkbenchSiteProgressService.class);
 
         // rebuild statistics data
-        CreateStatsJob job = new CreateStatsJob(getFilter());
+        CreateStatsJob job = new CreateStatsJob(getFilter(), getViewId());
         job.setRule(ResourcesPlugin.getWorkspace().getRoot());
         job.addJobChangeListener(new JobChangeAdapter()
         {
