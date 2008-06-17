@@ -23,9 +23,11 @@ package com.atlassw.tools.eclipse.checkstyle.config.configtypes;
 import java.io.IOException;
 import java.net.URL;
 
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
+import org.osgi.framework.Bundle;
 
-import com.atlassw.tools.eclipse.checkstyle.CheckstylePlugin;
 import com.atlassw.tools.eclipse.checkstyle.config.CheckstyleConfigurationFile;
 import com.atlassw.tools.eclipse.checkstyle.config.ICheckConfiguration;
 import com.puppycrawl.tools.checkstyle.PropertyResolver;
@@ -40,11 +42,26 @@ public class BuiltInConfigurationType extends ConfigurationType
 {
 
     /**
+     * constant for the contributor key. It stores the id of the plugin which
+     * contributes the built in configuration, so that the file can be retrieved
+     * properly.
+     */
+    public static final String CONTRIBUTOR_KEY = "contributor";
+
+    /**
      * {@inheritDoc}
      */
-    protected URL resolveLocation(ICheckConfiguration checkConfiguration) throws IOException
+    protected URL resolveLocation(ICheckConfiguration checkConfiguration)
     {
-        return CheckstylePlugin.getDefault().find(new Path(checkConfiguration.getLocation()));
+
+        String contributorName = (String) checkConfiguration.getAdditionalData().get(
+                CONTRIBUTOR_KEY);
+
+        Bundle contributor = Platform.getBundle(contributorName);
+        URL locationUrl = Platform.find(contributor, new Path(checkConfiguration.getLocation()),
+                null);
+
+        return locationUrl;
     }
 
     /**
@@ -58,9 +75,9 @@ public class BuiltInConfigurationType extends ConfigurationType
     }
 
     protected PropertyResolver getPropertyResolver(ICheckConfiguration config,
-            CheckstyleConfigurationFile configFile) throws IOException
+            CheckstyleConfigurationFile configFile)
     {
-        // no properties to resolve with builtin configurations
-        return null;
+
+        return new BuiltInFilePropertyResolver(resolveLocation(config).toString());
     }
 }

@@ -46,6 +46,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import com.atlassw.tools.eclipse.checkstyle.CheckstylePlugin;
 import com.atlassw.tools.eclipse.checkstyle.ErrorMessages;
+import com.atlassw.tools.eclipse.checkstyle.config.configtypes.BuiltInConfigurationType;
 import com.atlassw.tools.eclipse.checkstyle.config.configtypes.ConfigurationTypes;
 import com.atlassw.tools.eclipse.checkstyle.config.configtypes.IConfigurationType;
 import com.atlassw.tools.eclipse.checkstyle.config.migration.CheckConfigurationMigrator;
@@ -111,8 +112,8 @@ public final class CheckConfigurationFactory
      * Get an <code>CheckConfiguration</code> instance by its name.
      * 
      * @param name Name of the requested instance.
-     * @return The requested instance or <code>null</code> if the named
-     *         instance could not be found.
+     * @return The requested instance or <code>null</code> if the named instance
+     *         could not be found.
      */
     public static ICheckConfiguration getByName(String name)
     {
@@ -331,8 +332,12 @@ public final class CheckConfigurationFactory
 
             IConfigurationType configType = ConfigurationTypes.getByInternalName("builtin"); //$NON-NLS-1$
 
+            Map additionalData = new HashMap();
+            additionalData.put(BuiltInConfigurationType.CONTRIBUTOR_KEY, elements[i]
+                    .getContributor().getName());
+
             ICheckConfiguration checkConfig = new CheckConfiguration(name, location, description,
-                    configType, true, null, null);
+                    configType, true, null, additionalData);
             sConfigurations.add(checkConfig);
         }
     }
@@ -417,8 +422,8 @@ public final class CheckConfigurationFactory
         }
 
         /**
-         * Returns the default check configuration name or <code>null</code>
-         * if none was specified.
+         * Returns the default check configuration name or <code>null</code> if
+         * none was specified.
          * 
          * @return the default check configuration name or <code>null</code>
          */
