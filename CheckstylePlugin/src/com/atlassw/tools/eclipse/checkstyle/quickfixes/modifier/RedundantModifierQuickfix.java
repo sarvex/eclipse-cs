@@ -68,7 +68,7 @@ public class RedundantModifierQuickfix extends AbstractASTResolution
                 int pos = node.getStartPosition()
                         + (node.getJavadoc() != null ? node.getJavadoc().getLength()
                                 + JAVADOC_COMMENT_LENGTH : 0);
-                if (containsPosition(lineInfo, pos))
+                if (containsPosition(node, markerStartOffset))
                 {
 
                     List redundantKeyWords = Collections.EMPTY_LIST;
