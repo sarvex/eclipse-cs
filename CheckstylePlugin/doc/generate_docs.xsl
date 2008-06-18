@@ -119,7 +119,7 @@
             <xsl:if
                 test="$section != 'releases'">
                 <a
-                    href="{$path-prefix}releasenotes/4.4.0/release_notes.html"
+                    href="{$path-prefix}releasenotes/4.4.2/release_notes.html"
                     class="level1"><img
                         src="{$path-prefix}images/plus.gif"
                         alt=""/>Release Notes</a>
@@ -127,10 +127,16 @@
             <xsl:if
                 test="$section = 'releases'">
                 <a
-                    href="{$path-prefix}releasenotes/4.4.0/release_notes.html"
+                    href="{$path-prefix}releasenotes/4.4.2/release_notes.html"
                     class="level1"><img
                         src="{$path-prefix}images/minus.gif"
                         alt=""/>Release Notes</a>
+                <a
+                    href="{$path-prefix}releasenotes/4.4.2/release_notes.html"
+                    class="level2">Release 4.4.2</a>
+                <a
+                    href="{$path-prefix}releasenotes/4.4.1/release_notes.html"
+                    class="level2">Release 4.4.1</a>
                 <a
                     href="{$path-prefix}releasenotes/4.4.0/release_notes.html"
                     class="level2">Release 4.4.0</a>
