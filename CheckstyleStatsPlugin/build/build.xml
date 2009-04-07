@@ -58,7 +58,7 @@
 		<getEclipseClasspath project="${basedir}" classpathId="fragment.classpath" targetPlatformLocation="${eclipse.platform.dir}" />
 
 		<!-- compile -->
-		<javac srcdir="${basedir}/src" destdir="${dist.basedir.tmpdir}/bin" classpathref="fragment.classpath" source="1.4" debug="on" />
+		<javac fork="true" srcdir="${basedir}/src" destdir="${dist.basedir.tmpdir}/bin" classpathref="fragment.classpath" source="1.4" debug="on" />
 
 		<!-- copy properties and other stuff -->
 		<copy todir="${dist.basedir.tmpdir}/bin">
@@ -138,7 +138,7 @@
 
 	<target name="merge.into.plugin.src.zip" if="plugin.src.zip">
 		<zip destfile="${plugin.src.zip}" update="true">
-			<zipfileset src="${dist.basedir}/${src.dist.file}" includes="**/*"/>
+			<zipfileset src="${dist.basedir}/${src.dist.file}" includes="**/*" />
 		</zip>
 		<delete file="${dist.basedir}/${src.dist.file}" />
 	</target>
