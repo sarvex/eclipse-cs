@@ -1,6 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: eclipse-cs Plugin and Checkstyle Documentation
-Bundle-SymbolicName: net.sf.eclipsecs.doc;singleton:=true
-Bundle-Version: 0.0.0
-Bundle-Vendor: Lars Koedderitzsch
