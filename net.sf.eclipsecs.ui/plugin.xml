@@ -358,6 +358,8 @@
                 <separator
                     name="xbatch"/>
             </menu>
+            <!--
+            Activate this menu-point for Transformingaction from Formatter-Profile to Checkstyle-Setting
             <action
                 label="%FormatterTransformingAction.label"
                 class="net.sf.eclipsecs.ui.actions.FormatterTransformingAction"
@@ -365,6 +367,7 @@
                 menubarPath="Checkstyle.menu/ondemand"
                 tooltip="%FormatterTransformingTooltip.tooltip"
                 id="net.sf.eclipsecs.actions.FormatterTransformingAction"/>
+            -->
             <action
                 label="%CheckstyleTransformingAction.label"
                 class="net.sf.eclipsecs.ui.actions.CheckstyleTransformingAction"
