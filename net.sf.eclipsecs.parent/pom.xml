@@ -20,7 +20,7 @@
     </modules>
 
     <properties>
-        <tycho-version>4.0.2</tycho-version>
+        <tycho-version>4.0.3</tycho-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
